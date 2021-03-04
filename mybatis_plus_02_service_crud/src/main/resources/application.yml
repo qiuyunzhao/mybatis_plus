@@ -1,0 +1,34 @@
+spring:
+  # 设置druid数据源
+  datasource:
+    # 数据源基本配置
+    username: root
+    password: aaaaaa
+    url: jdbc:mysql://192.168.0.150:3306/mybatis_plus?characterEncoding=UTF-8&serverTimezone=GMT%2B8
+    driver‐class‐name: com.mysql.cj.jdbc.Driver # 注意MySQL8.x的驱动
+    type: com.alibaba.druid.pool.DruidDataSource
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss # 返回的json日期类型时间格式
+    time-zone: GMT+8
+
+# mybatis-plus配置（与mybatis配置项几乎一样，就是这里用mybatis-plus而不是mybatis）
+# 可配置项见官网 https://mybatis.plus/config/#globalconfig-2
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 开启sql日志打印(支持配置文件和注解)
+    map-underscore-to-camel-case: true # 驼峰下划线映射规则（默认true）
+  type-aliases-package: com.haoqian.mybatisPlus.entity # 开启器@Alias别名功能注解的支持
+  global-config:
+    db-config:
+      id-type: auto      # 全局主键生成策略
+      table-prefix: tbl_ # 全局表前缀配置
+
+# 设置actuator健康管理
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"   # 设置开启所有监控端点（使用/httptrace还需注册HttpTraceRepository实例）
+  endpoint:
+    health:
+      show-details: always # 设置显示健康状态的详细信息
